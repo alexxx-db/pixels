@@ -6,7 +6,8 @@
 
 # COMMAND ----------
 
-# MAGIC %pip install pydicom s3fs python-gdcm==3.0.19 git+https://github.com/databricks-industry-solutions/pixels.git
+# MAGIC %pip install git+https://github.com/databricks-industry-solutions/pixels.git --quiet # if you are not using REPOs
+# MAGIC #%pip install pydicom s3fs python-gdcm==3.0.19 --quiet  # if you are using REPOs on a Databricks runtime
 
 # COMMAND ----------
 

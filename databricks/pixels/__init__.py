@@ -1,4 +1,3 @@
-from databricks.pixels.objects import ObjectFrames
 from databricks.pixels.plot_result import PlotResult
 from databricks.pixels.catalog import Catalog
 from databricks.pixels.tag_extractor import TagExtractor

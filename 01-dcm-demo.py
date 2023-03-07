@@ -83,7 +83,7 @@ catalog.save(thumbnail_df, mode=write_mode)
 
 # COMMAND ----------
 
-# MAGIC %sql select * from ${c.table}
+# MAGIC %sql select rowId, meta,  extension, length, thumbnail, modificationTime, path_tags, path, is_anon from ${c.table}
 
 # COMMAND ----------
 
@@ -94,11 +94,11 @@ catalog.save(thumbnail_df, mode=write_mode)
 # MAGIC   format_number(count(DISTINCT meta:['00100010'].Value[0].Alphabetic),0) as patient_count,
 # MAGIC   format_number(count(1),0) num_dicoms,
 # MAGIC   format_number(sum(length) /(1024*1024*1024), 1) as total_size_in_gb,
-# MAGIC   format_number(avg(length), 0) avg_size_in_bytes
+# MAGIC   format_number(avg(length), 0) avg_file_size_in_bytes
 # MAGIC   from ${c.table} t
 # MAGIC   where extension = 'dcm'
 # MAGIC )
-# MAGIC select patient_count, num_dicoms, total_size_in_gb, avg_size_in_bytes from x
+# MAGIC select patient_count, num_dicoms, total_size_in_gb, avg_file_size_in_bytes from x
 
 # COMMAND ----------
 
@@ -137,3 +137,7 @@ catalog.save(thumbnail_df, mode=write_mode)
 
 # MAGIC %md
 # MAGIC Next: <a href="$./02-dcm-browser">DICOM Image Browser</a>
+
+# COMMAND ----------
+
+

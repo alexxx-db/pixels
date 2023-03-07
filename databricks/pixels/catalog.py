@@ -1,6 +1,5 @@
 from pyspark.sql import DataFrame
 from pyspark.sql import functions as f
-from databricks.pixels import ObjectFrames
 
 # dfZipWithIndex helper function
 from pyspark.sql.types import LongType, StructField, StructType
@@ -8,8 +7,8 @@ from pyspark.sql.types import LongType, StructField, StructType
 from pyspark.sql import DataFrame
 
 
-
 class Catalog:
+    """ Encapsulate Catalog operations """
     CATALOG_PARTITIONS = 2000
 
     def is_anon(self):
@@ -52,7 +51,7 @@ class Catalog:
       }
 
     def __repr__(self):
-      return f'Catalog(spark, table="{self._table}")'
+      return f'Catalog(spark, table="{self._table}", options={self._userOptions})'
     
     def catalog(self, path:str, pattern:str = "*", recurse:bool = True) -> DataFrame:
         """Perform the catalog action and return a spark dataframe
@@ -71,13 +70,13 @@ class Catalog:
         )
         df = Catalog._with_path_meta(df)
         df = Catalog._dfZipWithIndex(self._spark, df) # add an unique ID
-        return ObjectFrames(df)
+        return (df)
 
     def load(self, table:str = None) -> DataFrame:
       """
-        @return Spark dataframe representing the object Catalog
+        @return Spark dataframe representing the object Catalog contents
       """
-      return ObjectFrames(self._spark.table(self._table if not table else table))
+      return (self._spark.table(self._table if not table else table))
    
     def save(self,
         df:DataFrame, 
